@@ -12,7 +12,6 @@
         <table class="table table-bordered table-striped table-hover">
             <thead class="bg-info text-white">
                 <tr>
-                    <th>ID</th>
                     <th>Cédula</th>
                     <th>Primer Nombre</th>
                     <th>Segundo Nombre</th>
@@ -48,8 +47,7 @@
 
                 while ($datos = $sql->fetch_object()) { ?>
                     <tr>
-                        <td><?= $datos->id ?></td>
-                        <td><?= $datos->cedula_completa ?></td>
+                        <td><?= $datos->cedula ?></td>
                         <td><?= $datos->nombre1 ?></td>
                         <td><?= $datos->nombre2 ?></td>
                         <td><?= $datos->apellido1 ?></td>
