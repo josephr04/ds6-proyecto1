@@ -37,11 +37,11 @@
         <span>-</span>
 
         <!-- Tomo -->
-                    <input type="text" class="form-control text-center" name="tomo" id="tomo" maxlength="3" required style="max-width: 90px;">
+                    <input type="text" class="form-control text-center" name="tomo" id="tomo" maxlength="4" required style="max-width: 90px;">
                     <span>-</span>
 
         <!-- Asiento -->
-                    <input type="text" class="form-control text-center" name="asiento" id="asiento" maxlength="4" required style="max-width: 100px;">
+                    <input type="text" class="form-control text-center" name="asiento" id="asiento" maxlength="5" required style="max-width: 100px;">
                 </div>
             </div>
 
