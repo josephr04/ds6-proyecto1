@@ -6,10 +6,10 @@ if ($conexion->connect_error) {
 
 if (isset($_POST["btnregistrar"])) {
     // Cédula
-    $cedula = "$prefijo-$cedula-$tomo-$asiento";
     $prefijo = $_POST["prefijo"] ?? "";
     $tomo = $_POST["tomo"] ?? "";
     $asiento = $_POST["asiento"] ?? "";
+    $cedula = "$prefijo-$tomo-$asiento";
 
     // Nombres y apellidos
     $nombre1 = $_POST["nombre1"] ?? "";
@@ -51,10 +51,10 @@ if (isset($_POST["btnregistrar"])) {
         genero, estado_civil, tipo_sangre, usa_ac, f_nacimiento,
         celular, telefono, correo, calle, casa, comunidad,
         nacionalidad, f_contra, cargo, departamento, estado
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssssssssssssssssssssssssssss",
+    $stmt->bind_param("sssssssssssssssssssssssss",
         $cedula, $prefijo, $tomo, $asiento,
         $nombre1, $nombre2, $apellido1, $apellido2, $apellidoc,
         $genero, $estado_civil, $tipo_sangre, $usa_ac, $f_nacimiento,
