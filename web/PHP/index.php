@@ -33,15 +33,18 @@
             <option value="11">11</option>
             <option value="12">12</option>
             <option value="13">13</option>
+            <option value="PE">PE</option>
+            <option value="PN">PN</option>
+            <option value="E">E</option>
         </select>
         <span>-</span>
 
         <!-- Tomo -->
-                    <input type="text" class="form-control text-center" name="tomo" id="tomo" maxlength="4" required style="max-width: 90px;">
-                    <span>-</span>
+        <input type="number" class="form-control text-center" name="tomo" id="tomo" required style="max-width: 90px;" oninput="this.value = this.value.slice(0, 4)">
+        <span>-</span>
 
         <!-- Asiento -->
-                    <input type="text" class="form-control text-center" name="asiento" id="asiento" maxlength="5" required style="max-width: 100px;">
+                    <input type="number" class="form-control text-center" name="asiento" id="asiento" required style="max-width: 100px;" oninput="this.value = this.value.slice(0, 5)">
                 </div>
             </div>
 
@@ -121,7 +124,6 @@
                     <option value="AB-">AB-</option>
                     <option value="O+">O+</option>
                     <option value="O-">O-</option>
-                    <option value="Rh">Rh nulo (Rh-null)</option>
                 </select>
             </div>
 
