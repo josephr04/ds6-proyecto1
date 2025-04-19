@@ -174,7 +174,9 @@
             <!-- Nacionalidad -->
             <div class="mb-3">
                 <label for="nacionalidad" class="form-label">Nacionalidad</label>
-                <input type="text" class="form-control" name="nacionalidad" id="nacionalidad" >
+                <select class="form-control" name="nacionalidad" id="nacionalidad">
+                    <option value="" disabled selected>Selecciona una nacionalidad</option>
+                </select>
             </div>
 
             <!-- Fecha de Contratación -->
