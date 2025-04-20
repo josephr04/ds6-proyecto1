@@ -8,42 +8,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </head>
 <body>
-
     <div class="container-fluid row">
         <form class="col-4 p-3 mx-auto" action="conexion.php" method="POST">
             <h3 class="text-center text-secondary">Formulario de Registro</h3>
-            <!-- Cedula -->
             <!-- Cédula -->
-<div class="mb-3">
-    <label class="form-label">Cédula</label>
-    <div class="d-flex align-items-center gap-2">
-        <!-- Prefijo como select -->
-        <select class="form-control text-center" name="prefijo" id="prefijo" required style="max-width: 80px;">
-            <option value="" disabled selected></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8" selected>8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="PE">PE</option>
-            <option value="PN">PN</option>
-            <option value="E">E</option>
-        </select>
-        <span>-</span>
+            <div class="mb-3">
+                <label class="form-label">Cédula</label>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Prefijo como select -->
+                    <select class="form-control text-center" name="prefijo" id="prefijo" required style="max-width: 80px;">
+                        <option value="" disabled selected></option>
+                        <?php
+                        // Array de prefijos            
+                        $prefijos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', 'PE', 'PN', 'E'];
+                        foreach ($prefijos as $prefijo) {
+                            echo "<option value='$prefijo'>$prefijo</option>";
+                        }
+                        ?>
+                    </select>
+                    <span>-</span>
 
-        <!-- Tomo -->
-        <input type="number" class="form-control text-center" name="tomo" id="tomo" required style="max-width: 90px;" oninput="this.value = this.value.slice(0, 4)">
-        <span>-</span>
+                    <!-- Tomo -->
+                    <input type="number" class="form-control text-center" name="tomo" id="tomo" required style="max-width: 90px;" oninput="this.value = this.value.slice(0, 4)">
+                    <span>-</span>
 
-        <!-- Asiento -->
+                    <!-- Asiento -->
                     <input type="number" class="form-control text-center" name="asiento" id="asiento" required style="max-width: 100px;" oninput="this.value = this.value.slice(0, 5)">
                 </div>
             </div>
@@ -116,14 +105,13 @@
                 <label for="tipo_sangre" class="form-label">Tipo de Sangre</label>
                 <select class="form-control" name="tipo_sangre" id="tipo_sangre" required>
                     <option value="" disabled selected>Seleccione un tipo</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
+                    <?php
+                        // Array de tipos de sangre        
+                        $tipos_sangre  = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+                        foreach ($tipos_sangre as $tipo) {
+                            echo "<option value='$tipo'>$tipo</option>";
+                        }
+                    ?>
                 </select>
             </div>
 
@@ -151,7 +139,36 @@
                 <input type="email" class="form-control" name="correo" id="correo" >
             </div>
 
+            <!-- Provincia -->
+            <div class="mb-3">
+                <label for="provincia" class="form-label">Provincia</label>
+                <select class="form-control" name="provincia" id="provincia" onchange="cargarDistritos(this.value)" required>
+                    <option value="" disabled selected>Seleccione una provincia</option>
+                    <?php
+                    include 'conexion.php';
+                    $provincias = mysqli_query($conexion, "SELECT codigo_provincia, nombre_provincia FROM provincia");
+                    while ($prov = mysqli_fetch_assoc($provincias)) {
+                        echo "<option value='{$prov['codigo_provincia']}'>{$prov['nombre_provincia']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
+            <!-- Distrito -->
+            <div class="mb-3">
+                <label for="Distrito" class="form-label">Distrito</label>
+                <select class="form-control" name="distrito" id="distrito" onchange="cargarCorregimientos(this.value)" required>
+                    <option value="" disabled selected>Seleccione una provincia primero</option>
+                </select>
+            </div>
+
+            <!-- Corregimiento -->
+            <div class="mb-3">
+                <label for="Corregimiento" class="form-label">Corregimiento</label>
+                <select class="form-control" name="corregimiento" id="corregimiento" required>
+                    <option value="" disabled selected>Seleccione una provincia primero</option>
+                </select>
+            </div>
   
             <!-- Calle -->
             <div class="mb-3">
@@ -208,6 +225,7 @@
 
         <script src="../javascript/formateo_campos.js"></script>
         <script src="../javascript/genero.js"></script>
+        <script src="../javascript/localidades.js"></script>
     </div>
 </body>
 </html>
