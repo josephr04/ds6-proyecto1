@@ -35,6 +35,9 @@ if (isset($_POST["btnregistrar"])) {
     $celular = $_POST["celular"] ?? "";
     $telefono = $_POST["telefono"] ?? "";
     $correo = $_POST["correo"] ?? "";
+    $provincia = $_POST["provincia"] ?? "";
+    $distrito = $_POST["distrito"] ?? "";
+    $corregimiento = $_POST["corregimiento"] ?? "";
     $calle = $_POST["calle"] ?? "";
     $casa = $_POST["casa"] ?? "";
     $comunidad = $_POST["comunidad"] ?? "";
@@ -49,16 +52,16 @@ if (isset($_POST["btnregistrar"])) {
         cedula, prefijo, tomo, asiento,
         nombre1, nombre2, apellido1, apellido2, apellidoc,
         genero, estado_civil, tipo_sangre, usa_ac, f_nacimiento,
-        celular, telefono, correo, calle, casa, comunidad,
-        nacionalidad, f_contra, cargo, departamento, estado
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        celular, telefono, correo, provincia, distrito, corregimiento,
+        calle, casa, comunidad, nacionalidad, f_contra, cargo, departamento, estado
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("sssssssssssssssssssssssss",
+    $stmt->bind_param("ssssssssssssssssssssssssssss",
         $cedula, $prefijo, $tomo, $asiento,
         $nombre1, $nombre2, $apellido1, $apellido2, $apellidoc,
         $genero, $estado_civil, $tipo_sangre, $usa_ac, $f_nacimiento,
-        $celular, $telefono, $correo, $calle, $casa, $comunidad,
+        $celular, $telefono, $correo, $provincia, $distrito, $corregimiento, $calle, $casa, $comunidad,
         $nacionalidad, $f_contra, $cargo, $departamento, $estado
     );
 
