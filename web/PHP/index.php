@@ -93,10 +93,10 @@
                 <label for="estado_civil" class="form-label">Estado Civil</label>
                 <select class="form-control" name="estado_civil" id="estado_civil">
                     <option value="" disabled selected>Selecciona un estado civil</option>
-                    <option value="soltero">Soltero</option>
-                    <option value="casado">Casado</option>
-                    <option value="divorciado">Divorciado</option>
-                    <option value="viudo">Viudo</option>
+                    <option value="1">Soltero(a)</option>
+                    <option value="2">Casado(a)</option>
+                    <option value="3">Divorciado(a)</option>
+                    <option value="4">Viudo(a)</option>
                 </select>
             </div>
 
