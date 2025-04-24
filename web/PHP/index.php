@@ -185,7 +185,7 @@
             <!-- Comunidad -->
             <div class="mb-3">
                 <label for="comunidad" class="form-label">Comunidad</label>
-                <input type="text" class="form-control" name="comunidad" id="comunidad" >
+                <input type="text" class="form-control" name="comunidad" id="comunidad" oninput="this.value = this.value.slice(0, 25)">
             </div>
 
             <!-- Nacionalidad -->
