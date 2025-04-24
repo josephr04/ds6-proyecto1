@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (empty($_SESSION['correo_institucional'])) {
+    echo "Session not set. Redirecting to login.";
+    header("Location: login.php");
+    exit();
+} else {
+    echo "Session is set: " . $_SESSION['correo_institucional'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +21,7 @@
 <body>
     <div class="container-fluid row">
         <form class="col-4 p-3 mx-auto" action="conexion.php" method="POST">
+            <a href="logout.php" class="btn btn-danger">Logout</a>
             <h3 class="text-center text-secondary">Formulario de Registro</h3>
             <!-- Cédula -->
             <div class="mb-3">
