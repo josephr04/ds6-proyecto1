@@ -41,25 +41,25 @@
             <!-- Primer Nombre -->
             <div class="mb-3">
                 <label for="nombre1" class="form-label">Primer Nombre</label>
-                <input type="text" class="form-control" name="nombre1" id="nombre1" required>
+                <input type="text" class="form-control" name="nombre1" id="nombre1" required  oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
             </div>
 
             <!-- Segundo Nombre -->
             <div class="mb-3">
                 <label for="nombre2" class="form-label">Segundo Nombre</label>
-                <input type="text" class="form-control" name="nombre2" id="nombre2" required>
+                <input type="text" class="form-control" name="nombre2" id="nombre2" required  oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
             </div>
 
             <!-- Primer Apellido -->
             <div class="mb-3">
                 <label for="apellido1" class="form-label">Primer Apellido</label>
-                <input type="text" class="form-control" name="apellido1" id="apellido1" required>
+                <input type="text" class="form-control" name="apellido1" id="apellido1" required  oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
             </div>
 
             <!-- Segundo Apellido -->
             <div class="mb-3">
                 <label for="apellido2" class="form-label">Segundo Apellido</label>
-                <input type="text" class="form-control" name="apellido2" id="apellido2" required>
+                <input type="text" class="form-control" name="apellido2" id="apellido2" required oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
             </div>
 
             <!-- Género -->
@@ -85,7 +85,7 @@
             <!-- Apellido de Casada -->
             <div class="mb-3">
                 <label for="apellidoc" class="form-label">Apellido de Casada</label>
-                <input type="text" class="form-control" name="apellidoc" id="apellidoc">
+                <input type="text" class="form-control" name="apellidoc" id="apellidoc" oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
             </div>
 
             <!-- Estado Civil -->
@@ -124,19 +124,19 @@
             <!-- Celular -->
             <div class="mb-3">
                 <label for="celular" class="form-label">Celular</label>
-                <input type="text" class="form-control" name="celular" id="celular" >
+                <input type="text" class="form-control" name="celular" id="celular" required oninput="this.value = validarSoloNumeros(this.value.slice(0, 8))">
             </div>
 
             <!-- Teléfono -->
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" name="telefono" id="telefono" >
+                <input type="text" class="form-control" name="telefono" id="telefono" required oninput="this.value = validarSoloNumeros(this.value.slice(0, 7))">
             </div>
 
             <!-- Correo -->
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" name="correo" id="correo" >
+                <input type="email" class="form-control" name="correo" id="correo" required oninput="this.value = this.value.slice(0, 40)">
             </div>
 
             <!-- Provincia -->
@@ -179,7 +179,7 @@
             <!-- Casa -->
             <div class="mb-3">
                 <label for="casa" class="form-label">Casa</label>
-                <input type="text" class="form-control" name="casa" id="casa" >
+                <input type="text" class="form-control" name="casa" id="casa" oninput="this.value = validarSoloNumeros(this.value.slice(0, 10))">
             </div>
 
             <!-- Comunidad -->
@@ -203,20 +203,68 @@
             <!-- Cargo -->
             <div class="mb-3">
                 <label for="cargo" class="form-label">Cargo</label>
-                <input type="text" class="form-control" name="cargo" id="cargo" >
+                <select class="form-control" name="cargo" id="cargo" required>
+                    <option value="" disabled selected>Seleccione un cargo</option>
+                    <?php
+                    // Lista de cargos predefinidos
+                    $cargos = [
+                        'GE' => 'Gerente',
+                        'JE' => 'Jefe de Departamento',
+                        'AN' => 'Analista',
+                        'AS' => 'Asistente',
+                        'AD' => 'Administrativo',
+                        'TE' => 'Técnico',
+                        'VE' => 'Vendedor',
+                        'SO' => 'Soporte',
+                        'CO' => 'Consultor',
+                        'AU' => 'Auditor'
+                    ];
+
+                    foreach ($cargos as $codigo => $nombre) {
+                        echo "<option value='$codigo'>$nombre</option>";
+                    }
+                    ?>
+                </select>
             </div>
 
             <!-- Departamento -->
-            <div class="mb-3">
-                <label for="departamento" class="form-label">Departamento</label>
-                <input type="text" class="form-control" name="departamento" id="departamento" >
-            </div>
+               <div class="mb-3">
+                    <label for="departamento" class="form-label">Departamento</label>
+                    <select class="form-control" name="departamento" id="departamento" required>
+                        <option value="" disabled selected> seleccione un departamento</option>
+                        <?php
+                        // Lista de departamentos con códigos de 2 caracteres
+                        $departamentos = [
+                            'RH' => 'Recursos Humanos',
+                            'CO' => 'Contabilidad',
+                            'PR' => 'Producción',
+                            'VE' => 'Ventas',
+                            'MK' => 'Marketing',
+                            'LO' => 'Logística',
+                            'TI' => 'Tecnología',
+                            'ST' => 'Soporte Técnico',
+                            'AD' => 'Administración',
+                            'LE' => 'Legal'
+                        ];
+
+                        foreach ($departamentos as $codigo => $nombre) {
+                            echo "<option value='$codigo'>$nombre</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
 
             <!-- Estado -->
             <div class="mb-3">
                 <label for="estado" class="form-label">Estado</label>
-                <input type="text" class="form-control" name="estado" id="estado" >
+                <select class="form-control" name="estado" id="estado" required>
+                    <option value="" disabled selected>Seleccione un estado</option>
+                    <option value="0">Inactivo</option>
+                    <option value="1">Activo</option>
+                </select>
             </div>
+
 
             <button type="submit" class="btn btn-primary" name="btnregistrar" value="ok">Registrar</button>
         </form>
