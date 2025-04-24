@@ -23,6 +23,7 @@ if (empty($_SESSION['correo_institucional'])) {
         <form class="col-4 p-3 mx-auto" action="conexion.php" method="POST">
             <a href="logout.php" class="btn btn-danger">Logout</a>
             <h3 class="text-center text-secondary">Formulario de Registro</h3>
+            
             <!-- Cédula -->
             <div class="mb-3">
                 <label class="form-label">Cédula</label>
@@ -48,7 +49,6 @@ if (empty($_SESSION['correo_institucional'])) {
                     <input type="number" class="form-control text-center" name="asiento" id="asiento" required style="max-width: 100px;" oninput="this.value = this.value.slice(0, 5)">
                 </div>
             </div>
-
 
             <!-- Primer Nombre -->
             <div class="mb-3">
@@ -220,54 +220,29 @@ if (empty($_SESSION['correo_institucional'])) {
                 <select class="form-control" name="cargo" id="cargo" required>
                     <option value="" disabled selected>Seleccione un cargo</option>
                     <?php
-                    // Lista de cargos predefinidos
-                    $cargos = [
-                        'GE' => 'Gerente',
-                        'JE' => 'Jefe de Departamento',
-                        'AN' => 'Analista',
-                        'AS' => 'Asistente',
-                        'AD' => 'Administrativo',
-                        'TE' => 'Técnico',
-                        'VE' => 'Vendedor',
-                        'SO' => 'Soporte',
-                        'CO' => 'Consultor',
-                        'AU' => 'Auditor'
-                    ];
-
-                    foreach ($cargos as $codigo => $nombre) {
-                        echo "<option value='$codigo'>$nombre</option>";
+                    include 'conexion.php';
+                    $cargos = mysqli_query($conexion, "SELECT codigo, nombre FROM cargo");
+                    while ($cargo = mysqli_fetch_assoc($cargos)) {
+                        echo "<option value='{$cargo['codigo']}'>{$cargo['nombre']}</option>";
                     }
                     ?>
                 </select>
             </div>
 
             <!-- Departamento -->
-               <div class="mb-3">
-                    <label for="departamento" class="form-label">Departamento</label>
-                    <select class="form-control" name="departamento" id="departamento" required>
-                        <option value="" disabled selected> seleccione un departamento</option>
-                        <?php
-                        // Lista de departamentos con códigos de 2 caracteres
-                        $departamentos = [
-                            'RH' => 'Recursos Humanos',
-                            'CO' => 'Contabilidad',
-                            'PR' => 'Producción',
-                            'VE' => 'Ventas',
-                            'MK' => 'Marketing',
-                            'LO' => 'Logística',
-                            'TI' => 'Tecnología',
-                            'ST' => 'Soporte Técnico',
-                            'AD' => 'Administración',
-                            'LE' => 'Legal'
-                        ];
-
-                        foreach ($departamentos as $codigo => $nombre) {
-                            echo "<option value='$codigo'>$nombre</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-
+            <div class="mb-3">
+                <label for="departamento" class="form-label">Departamento</label>
+                <select class="form-control" name="departamento" id="departamento" required>
+                    <option value="" disabled selected> seleccione un departamento</option>
+                    <?php
+                    include 'conexion.php';
+                    $departamentos = mysqli_query($conexion, "SELECT codigo, nombre FROM departamento");
+                    while ($dep = mysqli_fetch_assoc($departamentos)) {
+                        echo "<option value='{$dep['codigo']}'>{$dep['nombre']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
             <!-- Estado -->
             <div class="mb-3">
@@ -278,7 +253,6 @@ if (empty($_SESSION['correo_institucional'])) {
                     <option value="1">Activo</option>
                 </select>
             </div>
-
 
             <button type="submit" class="btn btn-primary" name="btnregistrar" value="ok">Registrar</button>
         </form>
