@@ -58,8 +58,7 @@
                 </div>
 
                 <div>
-                  <p class="mb-0">No tienes una cuenta? <a href="#!" class="text-white-50 fw-bold">Registrate aquí</a>
-                  </p>
+                  <p class="mb-0">Empresa Ficticia S.A.</p>
                 </div>
 
               </div>
