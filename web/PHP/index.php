@@ -262,10 +262,9 @@ if (empty($_SESSION['correo_institucional'])) {
                     <option value="1">Activo</option>
                 </select>
             </div>
-
+            
             <button type="submit" class="btn btn-primary" name="btnregistrar" value="ok">Registrar</button>
         </form>
-
         <script src="../javascript/formateo_campos.js"></script>
         <script src="../javascript/genero.js"></script>
         <script src="../javascript/localidades.js"></script>
