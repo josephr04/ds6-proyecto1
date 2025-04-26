@@ -1,12 +1,21 @@
 <?php
 session_start();
 
-if (empty($_SESSION['correo_institucional'])) {
-    echo "Session not set. Redirecting to login.";
+// Duración de la sesión (15 minutos)
+$timeout = 900; // 900 segundos = 15 minutos
+
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout) {
+    session_unset();
+    session_destroy();
     header("Location: login.php");
     exit();
-} else {
+}
+$_SESSION['last_activity'] = time();
+
+if (empty($_SESSION['correo_institucional'])) {
     echo "Session is set: " . $_SESSION['correo_institucional'];
+    header("Location: login.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
