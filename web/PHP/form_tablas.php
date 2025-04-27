@@ -65,6 +65,9 @@
                             <div class="info-line"><i class="bi bi-phone"></i> Celular: <?= $datos->celular ?></div>
                             <div class="info-line"><i class="bi bi-telephone"></i> Teléfono: <?= $datos->telefono ?></div>
                             <div class="info-line"><i class="bi bi-envelope"></i> Correo: <?= $datos->correo ?></div>
+                            <div class="info-line"><i class="bi bi-whatsapp"></i> corregimiento: <?= $datos->corregimiento?></div>
+
+
 
                             <div class="section-title">🏠 Dirección</div>
                             <div class="info-line"><i class="bi bi-geo-alt"></i> <?= $datos->provincia ?>, <?= $datos->distrito ?></div>
@@ -73,7 +76,7 @@
 
                             <div class="section-title">💼 Laboral</div>
                             <div class="info-line"><i class="bi bi-calendar-check"></i> Contratación: <?= $datos->f_contra ?></div>
-                            <div class="info-line"><i class="bi bi-building"></i> Estado: <?= $datos->estado ?></div>
+                            <div class="info-line"><i class="bi bi-building"></i> Estado: <?= $datos->estado ? 'Activo': 'Inactivo'?></div>
                             <div class="info-line"><i class="bi bi-award"></i> Nacionalidad: <?= $datos->nacionalidad ?></div>
                             <div class="info-line"><i class="bi bi-wind"></i> ¿Usa A/C?: <?= $datos->usa_ac == 0 ? 'Sí' : 'No' ?></div>
                         </div>
