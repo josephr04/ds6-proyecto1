@@ -58,7 +58,7 @@
                 </div>
 
                 <div>
-                  <p class="mb-0">Empresa Ficticia S.A.</p>
+                  <p class="mb-0">Empresa Ficticia S.A</p>
                 </div>
 
               </div>
