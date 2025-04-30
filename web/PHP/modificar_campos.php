@@ -15,7 +15,7 @@ include 'conexion.php';
         <form class="col-4 p-3 mx-auto" action="conexion.php" method="POST">
             <a href="logout.php" class="btn btn-danger">Logout</a>
             <h3 class="text-center text-secondary">Modificar productos </h3>
-            
+
             <!-- Cédula -->
             <div class="mb-3 ">
                 <label class="form-label">Cédula</label>
@@ -52,7 +52,7 @@ include 'conexion.php';
             <!-- Segundo Nombre -->
             <div class="mb-3">
                 <label for="nombre2" class="form-label">Segundo Nombre</label>
-                <input type="text" class="form-control" name="nombre2" id="nombre2" required  oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
+                <input type="text" value="<?= $datos->nombre2?>" class="form-control" name="nombre2" id="nombre2" required  oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
             </div>
 
             <!-- Primer Apellido -->
