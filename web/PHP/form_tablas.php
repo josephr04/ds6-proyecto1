@@ -34,7 +34,7 @@
 </head>
 <body>
     <div class="container py-5">
-        <h2 class="text-center text-primary mb-4">📋 Lista de Empleados</h2>
+        <h2 class="text-center text-dark mb-4">📋 Lista de Empleados</h2>
         <div class="row g-4">
             <?php
             include "conexion.php";
