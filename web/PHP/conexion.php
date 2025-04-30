@@ -4,6 +4,8 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
+
+
 if (isset($_POST["btnregistrar"])) {
     // Cédula
     $prefijo = $_POST["prefijo"] ?? "";
@@ -14,6 +16,7 @@ if (isset($_POST["btnregistrar"])) {
     // Nombres y apellidos
     $nombre1 = $_POST["nombre1"] ?? "";
     $nombre2 = $_POST["nombre2"] ?? "";
+    
     $apellido1 = $_POST["apellido1"] ?? "";
     $apellido2 = $_POST["apellido2"] ?? "";
     
@@ -71,6 +74,7 @@ if (isset($_POST["btnregistrar"])) {
         echo "Error al registrar empleado: " . $stmt->error;
     }
 
+    
     $stmt->close();
     $conexion->close();
 }
