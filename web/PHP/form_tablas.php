@@ -45,8 +45,17 @@
         <div class="row g-4">
             <?php
             include "conexion.php";
-            $sql = $conexion->query("SELECT * FROM empleados");
-
+            $sql = $conexion->query("
+            SELECT empleados.*, 
+                   provincia.nombre_provincia, 
+                   distrito.nombre_distrito, 
+                   corregimiento.nombre_corregimiento 
+            FROM empleados 
+            LEFT JOIN provincia ON empleados.provincia = provincia.codigo_provincia
+            LEFT JOIN distrito ON empleados.distrito = distrito.codigo_distrito
+            LEFT JOIN corregimiento ON empleados.corregimiento = corregimiento.codigo_corregimiento
+            ");
+        
             while ($datos = $sql->fetch_object()) { ?>
                 <div class="col-md-6 col-lg-4">
                     <div class="card employee-card h-100">
@@ -66,14 +75,16 @@
                             <div class="info-line"><i class="bi bi-telephone"></i> Teléfono: <?= $datos->telefono ?></div>
                             <div class="info-line"><i class="bi bi-envelope"></i> Correo: <?= $datos->correo ?></div>
 
+
+
                             <div class="section-title">🏠 Dirección</div>
-                            <div class="info-line"><i class="bi bi-geo-alt"></i> <?= $datos->provincia ?>, <?= $datos->distrito ?></div>
-                            <div class="info-line"><i class="bi bi-signpost-split"></i> <?= $datos->corregimiento ?> - <?= $datos->calle ?></div>
+                            <div class="info-line"><i class="bi bi-geo-alt"></i> <?= $datos->nombre_provincia ?>, <?= $datos->nombre_distrito ?></div>
+                            <div class="info-line"><i class="bi bi-signpost-split"></i> <?= $datos->nombre_corregimiento ?> - <?= $datos->calle ?></div>
                             <div class="info-line"><i class="bi bi-house-door"></i> Casa: <?= $datos->casa ?>, <?= $datos->comunidad ?></div>
 
                             <div class="section-title">💼 Laboral</div>
                             <div class="info-line"><i class="bi bi-calendar-check"></i> Contratación: <?= $datos->f_contra ?></div>
-                            <div class="info-line"><i class="bi bi-building"></i> Estado: <?= $datos->estado ?></div>
+                            <div class="info-line"><i class="bi bi-building"></i> Estado: <?= $datos->estado ? 'Activo': 'Inactivo'?></div>
                             <div class="info-line"><i class="bi bi-award"></i> Nacionalidad: <?= $datos->nacionalidad ?></div>
                             <div class="info-line"><i class="bi bi-wind"></i> ¿Usa A/C?: <?= $datos->usa_ac == 0 ? 'Sí' : 'No' ?></div>
                         </div>
