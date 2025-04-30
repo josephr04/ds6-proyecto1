@@ -19,17 +19,18 @@ include 'conexion.php';
     <style>
         body {
             display: flex;
-            height: 100vh;
+            height: 290px;
             margin: 0;
         }
 
         .sidebar {
             width: 250px;
-            background-color: #f8f9fa;
+            background-color:rgba(255, 250, 243, 0.89);
             display: flex;
             flex-direction: column;
             padding: 15px;
-            border-right: 1px solid #ddd;
+            border-right: 1px solid #ddd;{}
+            
         }
 
         .sidebar-header {
@@ -75,7 +76,7 @@ include 'conexion.php';
 
         .content {
             flex-grow: 1;
-            padding: 20px;
+            padding: 10px;
         }
     </style>
 </head>
@@ -84,8 +85,6 @@ include 'conexion.php';
   <div class="sidebar-header border-bottom">
     <div class="sidebar-brand">Home</div>
   </div>
-
-  
   <ul class="sidebar-nav">
     <li class="nav-item nav-group show">
       <a class="nav-link nav-group-toggle">
@@ -108,9 +107,6 @@ include 'conexion.php';
       </ul>
     </li>   
   </ul>
-</div>
-<div class="content text-center">
-    <h1>¡Bienvenido Administrador!</h1>
 </div>
 </body>
 </html>

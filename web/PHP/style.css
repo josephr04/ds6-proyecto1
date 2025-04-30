@@ -1,1 +1,9 @@
-
+ /* Fondo para toda la página */    
+    body {
+            background-image: url('img/fondoazul.png'); /* Cambia la ruta por la ubicación de tu imagen */
+            background-size: cover; /* Esto hace que la imagen cubra toda la pantalla */
+            background-position: center center; /* Centra la imagen */
+            background-attachment: fixed; /* Esto hace que la imagen quede fija al hacer scroll */
+            margin: 0;
+            font-family: Arial, sans-serif;
+ }
