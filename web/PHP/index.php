@@ -139,6 +139,18 @@ if (empty($_SESSION['correo_institucional'])) {
                                 <label for="apellidoc" class="form-label">Apellido de Casada</label>
                                 <input type="text" class="form-control" name="apellidoc" id="apellidoc" oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
                             </div>
+
+
+                            <div class="col-md-6">
+                                <label for="estado_civil" class="form-label">Estado Civil</label>
+                                <select class="form-select" name="estado_civil" id="estado_civil" required>
+                                    <option value="" disabled selected>Seleccione su estado civil</option>
+                                    <option value="1">Soltero/a</option>
+                                    <option value="2">Casado/a</option>
+                                    <option value="3">Divorciado/a</option>
+                                    <option value="4">Viudo/a</option>
+                                </select>
+                            </div>
                             
                             <div class="mb-3">
                                 <label class="form-label">Fecha de Nacimiento</label>
@@ -205,10 +217,13 @@ if (empty($_SESSION['correo_institucional'])) {
                                 </select>
                             </div>
                             <div class="mb-3">
+
                                 <label class="form-label">Corregimiento</label>
                                 <select class="form-control" name="corregimiento" id="corregimiento" required>
                                     <option value="" disabled selected>Seleccione una provincia primero</option>
                                 </select>
+                                
+
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Calle</label>
@@ -230,7 +245,7 @@ if (empty($_SESSION['correo_institucional'])) {
                                 include "conexion.php";
                                 $sql = $conexion->query("SELECT codigo, pais FROM nacionalidad ORDER BY pais ASC");
                                 while ($row = $sql->fetch_assoc()) {
-                                    echo "<option value='{$row['codigo']}'>{$row['pais']} ({$row['codigo']})</option>";
+                                    echo "<option value='{$row['codigo']}'>{$row['pais']}</option>";
                                 }
                                 ?>
                             </select>
