@@ -104,7 +104,7 @@ include "select.php";
                             <td><?= ($datos->estado == 0) ?'Activo': 'Inactivo' ?></td>
                             <td>
                                 <!-- Botones de acción con iconos de Font Awesome -->
-                                <a href="modificar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning">
+                                <a href="modificar_campos.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
 
