@@ -12,9 +12,7 @@ include "select.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    
-    
-    
+
     <style>
         body {
             background-color: #f0f2f5;
@@ -40,9 +38,6 @@ include "select.php";
                 <thead class="table-primary">
                     <tr>
                         <th>Cédula</th>
-                        <th>Prefijo</th>
-                        <th>Tomo</th>
-                        <th>Asiento</th>
                         <th>Primer Nombre</th>
                         <th>Segundo Nombre</th>
                         <th>Primer Apellido</th>
@@ -74,9 +69,7 @@ include "select.php";
                     <?php while ($datos = $sql->fetch_object()) { ?>
                         <tr>
                             <td><?= $datos->cedula ?></td>
-                            <td><?= $datos->prefijo ?></td>
-                            <td><?= $datos->tomo ?></td>
-                            <td><?= $datos->asiento ?></td>
+
                             <td><?= $datos->nombre1 ?></td>
                             <td><?= $datos->nombre2 ?></td>
                             <td><?= $datos->apellido1 ?></td>
@@ -111,8 +104,10 @@ include "select.php";
                             <td><?= ($datos->estado == 0) ?'Activo': 'Inactivo' ?></td>
                             <td>
                                 <!-- Botones de acción con iconos de Font Awesome -->
-                                <a href="editar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning">
+                                <a href="modificar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i> Editar
+                                </a>
+
                                 </a>
                                 <a href="eliminar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
                                     <i class="fas fa-trash-alt"></i> Eliminar
