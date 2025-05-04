@@ -11,7 +11,7 @@ $sql = $conexion->query("SELECT
     n.pais AS nacionalidad,
     e.f_contra,
     dep.nombre AS departamento,
-    car.nombre AS nombre_cargo,  -- Nombre del cargo
+    car.nombre AS nombre_cargo,  
     e.estado
 FROM empleados e
 LEFT JOIN nacionalidad n ON e.nacionalidad = n.codigo

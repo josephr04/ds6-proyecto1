@@ -299,8 +299,9 @@ if (empty($_SESSION['correo_institucional'])) {
                 </div>
 
                 <!-- Botón de Submit -->
-                <button type="submit" name="btnregistrar" class="btn btn-primary px-4">Registrar</button>
-
+                <div class="text-center mt-4">
+                     <button type="submit" name="btnregistrar" class="btn btn-primary px-4">Registrar</button>
+                </div>
             </form>
         </div>
     </div>
