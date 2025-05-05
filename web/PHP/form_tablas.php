@@ -1,7 +1,8 @@
 <?php
-include "conexion.php";
-include "select.php";
+include "utils/conexion.php";
+include "utils/select.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,27 +13,24 @@ include "select.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        body {
-            background-color: #f0f2f5;
-            padding: 20px;
-        }
-        .table-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            overflow-x: auto;
-        }
-        h2 {
-            color: #0d6efd;
-        }
-    </style>
 </head>
 <body>
+    <!-- Sidebar -->
+    <?php include 'components/sidebar.php'; ?>
+
     <div class="container">
-        <h2 class="text-center mb-4 text-dark">📋 Lista de Empleados</h2>
+
+        <h2 class="text-center mb-4 mt-4 text-dark">📋 Lista de Empleados</h2>
+
+        <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
+            <div class="mt-3">
+                <div class="alert alert-success alert-dismissible fade show" style="max-width: 500px;" role="alert">
+                    <i class="fa-solid fa-check-circle me-2"></i> ¡Datos actualizados correctamente!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="table-container">
             <table class="table table-bordered table-striped">
                 <thead class="table-primary">
@@ -101,15 +99,15 @@ include "select.php";
                             <td><?= $datos->f_contra ?></td>
                             <td><?= $datos->nombre_cargo?></td>
                             <td><?= $datos->departamento ?></td>
-                            <td><?= ($datos->estado == 0) ?'Activo': 'Inactivo' ?></td>
+                            <td><?= ($datos->estado == 1) ?'Activo': 'Inactivo' ?></td>
                             <td>
                                 <!-- Botones de acción con iconos de Font Awesome -->
-                                <a href="modificar_campos.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning">
+                                <a href="modificar_campos.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning d-block mb-2">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
 
                                 </a>
-                                <a href="eliminar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
+                                <a href="functions/eliminar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
                                     <i class="fas fa-trash-alt"></i> Eliminar
                                 </a>
                             </td>
