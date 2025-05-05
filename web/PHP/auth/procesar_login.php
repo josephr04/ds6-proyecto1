@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include '../utils/conexion.php';
 session_start();
 if (isset($_POST['correo_institucional']) && isset($_POST['contrasena'])) {
     $correo = $_POST['correo_institucional'];
@@ -18,7 +18,7 @@ if (isset($_POST['correo_institucional']) && isset($_POST['contrasena'])) {
     if ($resultado->num_rows > 0) {
         session_regenerate_id(true); // Regenerate session ID to prevent session fixation
         $_SESSION['correo_institucional'] = $correo;
-        header("Location: ./index.php"); // Redirigir a la página principal
+        header("Location: ../index.php"); // Redirigir a la página principal
         exit();
     } else {
         echo "Correo o contraseña incorrectos.";
