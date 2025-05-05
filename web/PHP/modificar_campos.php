@@ -1,6 +1,5 @@
 <?php
-include 'conexion.php'; // conexion a la base de datos
-
+include 'utils/conexion.php'; // conexion a la base de datos
 
 $cedula = $_GET['cedula'] ?? null;
 $datos = null;
@@ -27,158 +26,16 @@ if ($cedula) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            display: flex;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f8f9fa;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: rgba(99, 99, 99, 0.89);
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-            border-right: 1px solid #ddd;
-            color: white;
-        }
-
-        .sidebar-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            color: white;
-        }
-
-        .sidebar-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-
-        .sidebar-nav .nav-item {
-            margin-bottom: 0.5rem;
-            width: 100%;
-        }
-
-        .sidebar-nav .nav-link {
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-        }
-
-        .sidebar-nav .nav-link:hover {
-            background-color: #e9ecef;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .sidebar-nav .nav-link i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-            color: #636363;
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-            text-align: center;
-        }
-
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .btn-logout {
-            margin-top: 20px;
-            width: 100%;
-            padding: 10px;
-            font-weight: bold;
-        }
-
-        .sidebar-brand {
-            color: white;
-        }
-
-        .card {
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .card-header {
-            font-weight: bold;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid rgba(0,0,0,.125);
-            text-align: center;
-        }
-
-        h1.text-center {
-            margin-bottom: 30px !important;
-            color: #333;
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-
-        .btn-primary {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
-            padding: 10px 20px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-brand">Home</div>
-        </div>
-        
-        <ul class="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="form_tablas.php">
-                    <i class="fas fa-eye"></i> Ver Empleados
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="modificar_campos.php">
-                    <i class="fas fa-edit"></i> Editar/Eliminar Empleado
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-user-plus"></i> Agregar Empleado
-                </a>
-            </li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="logout.php" class="btn btn-danger btn-logout">
-                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-            </a>
-        </div>
-    </div>
+    <?php include 'components/sidebar.php'; ?>
 
     <!-- Contenido Principal -->
     <div class="content">
         <div class="container py-4">
             <h1 class="text-center mb-5">Modificar Empleado</h1>
-            <form action="update.php" method="POST" class="row g-3">
+            <form action="functions/actualizar.php" method="POST" class="row g-3">
             <input type="hidden" name="id" value="<?= htmlspecialchars($datos['cedula'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 
                 <!-- Columna Izquierda -->
@@ -190,6 +47,7 @@ if ($cedula) {
                             <!-- Cédula -->
                             <div class="mb-3">
                                 <label class="form-label">Cédula</label>
+                                <input type="hidden" name="cedula_original" value="<?= $datos['cedula'] ?? '' ?>">
                                 <div class="d-flex gap-2">
                                     <select class="form-control text-center" name="prefijo" required style="max-width: 80px;">
                                         <option value="" disabled>Seleccione</option>
@@ -456,9 +314,9 @@ if ($cedula) {
                     </div>
                     
                     <!-- Botón de Submit -->
-                        <div class="text-center mt-4">
-                            <button type="submit" name="btnactualizar" class="btn btn-primary px-4">Actualizar</button>
-                        </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" name="btnactualizar" class="btn btn-primary px-4">Actualizar</button>
+                    </div>
                 </div>
             </form>
         </div>
