@@ -1,5 +1,5 @@
 function cargarDistritos(codigo_provincia) {
-  fetch(`localidades.php?tipo=distrito&provincia_id=${codigo_provincia}`)
+  fetch(`utils/localidades.php?tipo=distrito&provincia_id=${codigo_provincia}`)
       .then(res => res.json())
       .then(data => {
           let distritoSelect = document.getElementById("distrito");
@@ -14,7 +14,7 @@ function cargarDistritos(codigo_provincia) {
 }
 
 function cargarCorregimientos(codigo_distrito) {
-  fetch(`localidades.php?tipo=corregimiento&distrito_id=${codigo_distrito}`)
+  fetch(`utils/localidades.php?tipo=corregimiento&distrito_id=${codigo_distrito}`)
       .then(res => res.json())
       .then(data => {
           let corregimientoSelect = document.getElementById("corregimiento");

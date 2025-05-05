@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-  <form action="procesar_login.php" method="POST">
+  <form action="auth/procesar_login.php" method="POST">
     <section class="vh-100 gradient-custom">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">

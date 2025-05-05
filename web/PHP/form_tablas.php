@@ -1,97 +1,122 @@
+<?php
+include "utils/conexion.php";
+include "utils/select.php";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Empleados</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f0f2f5;
-        }
-        .employee-card {
-            border: none;
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
-        }
-        .employee-card:hover {
-            transform: scale(1.01);
-        }
-        .card-header {
-            background-color: #0d6efd;
-            color: white;
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
-        }
-        .section-title {
-            font-weight: bold;
-            color: #198754;
-            margin-top: 10px;
-        }
-        .info-line i {
-            color: #0d6efd;
-            margin-right: 6px;
-        }
-        .info-line {
-            margin-bottom: 6px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container py-5">
-        <h2 class="text-center text-primary mb-4">📋 Lista de Empleados</h2>
-        <div class="row g-4">
-            <?php
-            include "conexion.php";
-            $sql = $conexion->query("
-            SELECT empleados.*, 
-                   provincia.nombre_provincia, 
-                   distrito.nombre_distrito, 
-                   corregimiento.nombre_corregimiento 
-            FROM empleados 
-            LEFT JOIN provincia ON empleados.provincia = provincia.codigo_provincia
-            LEFT JOIN distrito ON empleados.distrito = distrito.codigo_distrito
-            LEFT JOIN corregimiento ON empleados.corregimiento = corregimiento.codigo_corregimiento
-            ");
-        
-            while ($datos = $sql->fetch_object()) { ?>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card employee-card h-100">
-                        <div class="card-header text-center">
-                            <h5 class="mb-0"><?= $datos->nombre1 . " " . $datos->apellido1 ?></h5>
-                            <small><?= $datos->cargo ?> - <?= $datos->departamento ?></small>
-                        </div>
-                        <div class="card-body">
-                            <div class="section-title">👤 Personal</div>
-                            <div class="info-line"><i class="bi bi-credit-card-2-front"></i> Cédula: <?= $datos->cedula ?></div>
-                            <div class="info-line"><i class="bi bi-gender-ambiguous"></i> Género: <?= $datos->genero == 0 ? 'Masculino' : 'Femenino' ?></div>
-                            <div class="info-line"><i class="bi bi-droplet"></i> Sangre: <?= $datos->tipo_sangre ?></div>
-                            <div class="info-line"><i class="bi bi-calendar3"></i> Nacimiento: <?= $datos->f_nacimiento ?></div>
+    <!-- Sidebar -->
+    <?php include 'components/sidebar.php'; ?>
 
-                            <div class="section-title">📞 Contacto</div>
-                            <div class="info-line"><i class="bi bi-phone"></i> Celular: <?= $datos->celular ?></div>
-                            <div class="info-line"><i class="bi bi-telephone"></i> Teléfono: <?= $datos->telefono ?></div>
-                            <div class="info-line"><i class="bi bi-envelope"></i> Correo: <?= $datos->correo ?></div>
+    <div class="container">
 
+        <h2 class="text-center mb-4 mt-4 text-dark">📋 Lista de Empleados</h2>
 
-
-                            <div class="section-title">🏠 Dirección</div>
-                            <div class="info-line"><i class="bi bi-geo-alt"></i> <?= $datos->nombre_provincia ?>, <?= $datos->nombre_distrito ?></div>
-                            <div class="info-line"><i class="bi bi-signpost-split"></i> <?= $datos->nombre_corregimiento ?> - <?= $datos->calle ?></div>
-                            <div class="info-line"><i class="bi bi-house-door"></i> Casa: <?= $datos->casa ?>, <?= $datos->comunidad ?></div>
-
-                            <div class="section-title">💼 Laboral</div>
-                            <div class="info-line"><i class="bi bi-calendar-check"></i> Contratación: <?= $datos->f_contra ?></div>
-                            <div class="info-line"><i class="bi bi-building"></i> Estado: <?= $datos->estado ? 'Activo': 'Inactivo'?></div>
-                            <div class="info-line"><i class="bi bi-award"></i> Nacionalidad: <?= $datos->nacionalidad ?></div>
-                            <div class="info-line"><i class="bi bi-wind"></i> ¿Usa A/C?: <?= $datos->usa_ac == 0 ? 'Sí' : 'No' ?></div>
-                        </div>
-                    </div>
+        <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
+            <div class="mt-3">
+                <div class="alert alert-success alert-dismissible fade show" style="max-width: 500px;" role="alert">
+                    <i class="fa-solid fa-check-circle me-2"></i> ¡Datos actualizados correctamente!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                 </div>
-            <?php } ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Apellido Casada</th>
+                        <th>Género</th>
+                        <th>Estado Civil</th>
+                        <th>Tipo de Sangre</th>
+                        <th>Usa AC</th>
+                        <th>Fecha Nac.</th>
+                        <th>Celular</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Provincia</th>
+                        <th>Distrito</th>
+                        <th>Corregimiento</th>
+                        <th>Calle</th>
+                        <th>Casa</th>
+                        <th>Comunidad</th>
+                        <th>Nacionalidad</th>
+                        <th>Fecha Contratación</th>
+                        <th>Cargo</th>
+                        <th>Departamento</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($datos = $sql->fetch_object()) { ?>
+                        <tr>
+                            <td><?= $datos->cedula ?></td>
+
+                            <td><?= $datos->nombre1 ?></td>
+                            <td><?= $datos->nombre2 ?></td>
+                            <td><?= $datos->apellido1 ?></td>
+                            <td><?= $datos->apellido2 ?></td>
+                            <td>
+                            <?= (!empty($datos->apellidoc)) ? htmlspecialchars($datos->apellidoc) : 'N/A' ?>
+                        </td>
+                            <td><?= ($datos->genero == 0) ? 'Masculino' : 'Femenino' ?></td>
+                            <td>
+                                <?= htmlspecialchars(
+                                $datos->estado_civil == 1 ? 'Soltero/a' : 
+                                ($datos->estado_civil == 2 ? 'Casado/a' : 
+                                ($datos->estado_civil == 3 ? 'Divorciado/a' : 'Viudo/a'))
+                                ) ?>
+                            </td>
+                            <td><?= $datos->tipo_sangre ?></td>
+                            <td><?= ($datos->usa_ac == 1) ? 'Sí' : 'N/A' ?></td>
+                            <td><?= $datos->f_nacimiento ?></td>
+                            <td><?= $datos->celular ?></td>
+                            <td><?= $datos->telefono ?></td>
+                            <td><?= $datos->correo ?></td>
+                            <td><?= $datos->provincia ?></td>
+                            <td><?= $datos->distrito ?></td>
+                            <td><?= $datos->corregimiento ?></td>
+                            <td><?= $datos->calle ?></td>
+                            <td><?= $datos->casa ?></td>
+                            <td><?= $datos->comunidad ?></td>
+                            <td><?= $datos->nacionalidad?></td>
+                            <td><?= $datos->f_contra ?></td>
+                            <td><?= $datos->nombre_cargo?></td>
+                            <td><?= $datos->departamento ?></td>
+                            <td><?= ($datos->estado == 1) ?'Activo': 'Inactivo' ?></td>
+                            <td>
+                                <!-- Botones de acción con iconos de Font Awesome -->
+                                <a href="modificar_campos.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-warning d-block mb-2">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+
+                                </a>
+                                <a href="functions/eliminar.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
 </html>
+

@@ -1,11 +1,11 @@
 <?php
-$conexion = new mysqli("localhost", "root", "", "ds6");
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
 
-if (isset($_POST["btnregistrar"])) {
-    // Cédula
+include "../utils/conexion.php";
+
+if (isset($_POST["btnactualizar"])) {
+
+    // Variables
+    $cedula_original = $_POST["cedula_original"] ?? "";
     $prefijo = $_POST["prefijo"] ?? "";
     $tomo = $_POST["tomo"] ?? "";
     $asiento = $_POST["asiento"] ?? "";
@@ -14,6 +14,7 @@ if (isset($_POST["btnregistrar"])) {
     // Nombres y apellidos
     $nombre1 = $_POST["nombre1"] ?? "";
     $nombre2 = $_POST["nombre2"] ?? "";
+    
     $apellido1 = $_POST["apellido1"] ?? "";
     $apellido2 = $_POST["apellido2"] ?? "";
     
@@ -47,31 +48,28 @@ if (isset($_POST["btnregistrar"])) {
     $departamento = $_POST["departamento"] ?? "";
     $estado = $_POST["estado"] ?? "";
 
-    // Consulta SQL con 28 campos
-    $sql = "INSERT INTO empleados (
-        cedula, prefijo, tomo, asiento,
-        nombre1, nombre2, apellido1, apellido2, apellidoc,
-        genero, estado_civil, tipo_sangre, usa_ac, f_nacimiento,
-        celular, telefono, correo, provincia, distrito, corregimiento,
-        calle, casa, comunidad, nacionalidad, f_contra, cargo, departamento, estado
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssssssssssssssssssssssssssss",
-        $cedula, $prefijo, $tomo, $asiento,
-        $nombre1, $nombre2, $apellido1, $apellido2, $apellidoc,
-        $genero, $estado_civil, $tipo_sangre, $usa_ac, $f_nacimiento,
-        $celular, $telefono, $correo, $provincia, $distrito, $corregimiento, $calle, $casa, $comunidad,
-        $nacionalidad, $f_contra, $cargo, $departamento, $estado
+    $stmt = $conexion->prepare("UPDATE empleados SET
+        cedula=?, prefijo=?, tomo=?, asiento=?, nombre1=?, nombre2=?, apellido1=?, apellido2=?, apellidoc=?, 
+        genero=?, estado_civil=?, tipo_sangre=?, usa_ac=?, f_nacimiento=?, celular=?, telefono=?, correo=?, 
+        provincia=?, distrito=?, corregimiento=?, calle=?, casa=?, comunidad=?, nacionalidad=?, 
+        f_contra=?, cargo=?, departamento=?, estado=? 
+        WHERE cedula=?");
+    
+    $stmt->bind_param("sssssssssssssssssssssssssssss", 
+        $cedula, $prefijo, $tomo, $asiento, $nombre1, $nombre2, $apellido1, $apellido2, $apellidoc,
+        $genero, $estado_civil, $tipo_sangre, $usa_ac, $f_nacimiento, $celular, $telefono, $correo,
+        $provincia, $distrito, $corregimiento, $calle, $casa, $comunidad, $nacionalidad,
+        $f_contra, $cargo, $departamento, $estado, $cedula_original
     );
 
     if ($stmt->execute()) {
-        echo "Empleado registrado exitosamente.";
+        header("Location: ../form_tablas.php?exito=1");
     } else {
-        echo "Error al registrar empleado: " . $stmt->error;
+        echo "<div class='alert alert-danger' role='alert'>Error al actualizar los datos.</div>";
     }
 
     $stmt->close();
     $conexion->close();
-}
+} 
+        
 ?>

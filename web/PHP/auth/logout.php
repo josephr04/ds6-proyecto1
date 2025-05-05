@@ -12,6 +12,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-header("Location: login.php"); // Redirect to the login page
+header("Location: ../login.php"); // Redirect to the login page
 exit();
 ?>
