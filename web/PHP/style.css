@@ -15,7 +15,26 @@ body {
         background-color: #f8f9fa;
 }
 
+.container {
+        width: 100%;
+        margin: 0 auto;
+        min-width: 500px;
+        padding-left: 250px;
+        box-sizing: border-box;
+}
+
+/* Sidebar Style */
+
+.sidebar-brand {
+        text-decoration: none;
+}
+
 .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+
         width: 250px;
         background-color: rgba(99, 99, 99, 0.89);
         display: flex;
@@ -103,4 +122,46 @@ body {
         font-weight: bold;
         background-color: #f1f1f1;
         border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+/* form_tablas Style */
+
+.table-container {
+        width: 100%;
+        min-width: 300px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 20px;
+        overflow-x: auto;
+}
+
+/* modificar_campos Style */
+.card {
+        border-radius: 10px;
+        margin-bottom: 20px;
+}
+
+.card-header {
+        font-weight: bold;
+        background-color: #f1f1f1;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        text-align: center;
+}
+
+h1.text-center {
+        margin-bottom: 30px !important;
+        color: #333;
+}
+
+.form-label {
+        font-weight: 500;
+}
+
+.btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        padding: 10px 20px;
+        font-weight: bold;
 }
