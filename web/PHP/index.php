@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexion.php';
+include 'utils/conexion.php';
 
 // Duración de la sesión (15 minutos)
 $timeout = 900; // 900 segundos = 15 minutos
@@ -35,42 +35,23 @@ if (empty($_SESSION['correo_institucional'])) {
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-brand">Home</div>
-        </div>
-        
-        <ul class="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link" href="form_tablas.php">
-                    <i class="fas fa-eye"></i> Ver Empleados
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="modificar_campos.php">
-                    <i class="fas fa-edit"></i> Editar/Eliminar Empleado
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">
-                    <i class="fas fa-user-plus"></i> Agregar Empleado
-                </a>
-            </li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="logout.php" class="btn btn-danger btn-logout">
-                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-            </a>
-        </div>
-    </div>
+    <?php include 'components/sidebar.php'; ?>
 
     <!-- Contenido Principal -->
     <div class="content">
         <div class="container py-4">
             <h1 class="text-center mb-5 text-dark">Bienvenido Administrador</h1>
 
-            <form class="row g-4 mx-auto" style="max-width: 1200px;" action="conexion.php" method="POST">
+            <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
+                <div class="mt-3">
+                    <div class="alert alert-success alert-dismissible fade show" style="max-width: 500px;" role="alert">
+                        <i class="fa-solid fa-check-circle me-2"></i> ¡Empleado registrado correctamente!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <form class="row g-4 mx-auto" style="max-width: 1200px;" action="functions/registrar.php" method="POST">
                 <!-- Columna Izquierda -->
                 <div class="col-md-6">
                     <!-- Card Personal -->
