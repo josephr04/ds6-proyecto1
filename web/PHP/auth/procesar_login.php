@@ -21,11 +21,12 @@ if (isset($_POST['correo_institucional']) && isset($_POST['contrasena'])) {
         header("Location: ../index.php"); // Redirigir a la página principal
         exit();
     } else {
-        echo "Correo o contraseña incorrectos.";
+        header("Location: ../login.php?error=Correo o contraseña incorrectos. Por favor, intente de nuevo."); // Redirigir a la página de login
+        exit();
     }
 
     $stmt->close();
 } else {
-    echo "Por favor, complete todos los campos.";
+    header("Location: ../login.php?error=Hay campos vacios"); // Redirigir a la página de login
 }
 ?>
