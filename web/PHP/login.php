@@ -1,78 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registro de Empleados</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-    .body {
-      align-items: center;
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
     }
 
-    .gradient-custom {
-      /* fallback for old browsers */
-      background: #6a11cb;
+    .card {
+      border: none;
+      border-radius: 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      color: #333;
+    }
 
-      /* Chrome 10-25, Safari 5.1-6 */
-      background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    .form-control {
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+    }
 
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-      }
+    .form-control::placeholder {
+      color: #aaa;
+    }
+
+    .btn-custom {
+      border-radius: 2rem;
+      padding: 0.75rem 2rem;
+      font-weight: 500;
+      background-color: #6a11cb;
+      border: none;
+      color: #fff;
+    }
+
+    .btn-custom:hover {
+      background-color: #5718a5;
+    }
+
+    .text-muted {
+      font-size: 0.9rem;
+    }
+
+    .social-icons a {
+      margin: 0 0.5rem;
+      color: #6a11cb;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #2575fc;
+    }
   </style>
 </head>
 <body>
-  <form action="auth/procesar_login.php" method="POST">
-    <section class="gradient-custom">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card bg-dark text-white" style="border-radius: 1rem;">
-              <div class="card-body p-5 text-center">
+  <section class="d-flex justify-content-center align-items-center vh-100">
+    <form action="auth/procesar_login.php" method="POST" class="w-100" style="max-width: 400px;">
+      <div class="card p-4">
+        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        <p class="text-center text-muted mb-4">Ingrese su correo institucional y contraseña</p>
 
-                <div class="mb-md-5 mt-md-4">
-
-                  <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                  <p class="text-white-50 mb-5">Por favor, ingrese su correo institucional y su contraseña</p>
-
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    <input type="correo_institucional" name="correo_institucional" id="typeEmailX" class="form-control form-control-lg" placeholder="Correo" required/>
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    <input type="password" name="contrasena" id="typePasswordX" class="form-control form-control-lg" placeholder="Contraseña" required/>
-                  </div>
-
-                  <?php if (isset($_GET['error'])): ?>
-                    <div class="text-danger mt-2 mb-4 px-5">
-                      <?php echo htmlspecialchars($_GET['error'], ENT_QUOTES, 'UTF-8'); ?>
-                    </div>
-                  <?php endif; ?>
-
-                  <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Olvidó su contraseña?</a></p>
-
-                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesión</button>
-
-                  <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                    <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                    <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                    <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                  </div>
-
-                </div>
-
-                <div>
-                  <p class="mb-0">Empresa Ficticia S.A</p>
-                </div>
-
-              </div>
-            </div>
-          </div>
+        <div class="mb-3">
+          <input type="email" name="correo_institucional" class="form-control" placeholder="Correo institucional" required />
         </div>
+
+        <div class="mb-3">
+          <input type="password" name="contrasena" class="form-control" placeholder="Contraseña" required />
+        </div>
+
+        <?php if (isset($_GET['error'])): ?>
+          <div class="text-danger text-center mb-3">
+            <?php echo htmlspecialchars($_GET['error'], ENT_QUOTES, 'UTF-8'); ?>
+          </div>
+        <?php endif; ?>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <a href="#!" class="text-muted small">¿Olvidó su contraseña?</a>
+        </div>
+
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-custom">Entrar</button>
+        </div>
+
+        <div class="social-icons text-center mb-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-google"></i></a>
+        </div>
+
+        <p class="text-center text-muted mb-0 small">Empresa Ficticia S.A</p>
       </div>
-    </section>
-  </form>
+    </form>
+  </section>
+
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
