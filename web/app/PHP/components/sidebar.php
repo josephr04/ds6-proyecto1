@@ -18,14 +18,14 @@
         </li>
         -->
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="agregar_empleado.php">
                 <i class="fas fa-user-plus"></i> Agregar Empleado
             </a>
         </li>
     </ul>
 
     <div class="sidebar-footer">
-        <a href="auth/logout.php" class="btn btn-danger btn-logout">
+        <a href="../auth/logout.php" class="btn btn-danger btn-logout">
             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
         </a>
     </div>

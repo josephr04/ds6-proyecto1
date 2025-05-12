@@ -1,6 +1,9 @@
 <?php
 session_start();
-include 'utils/conexion.php';
+include '../utils/conexion.php';
+include '../utils/verificar_rol.php';
+
+verificarRol(1); // Solo administrador
 
 // Duración de la sesión (15 minutos)
 $timeout = 900; // 900 segundos = 15 minutos
@@ -31,16 +34,16 @@ if (empty($_SESSION['correo_institucional'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- Sidebar -->
-    <?php include 'components/sidebar.php'; ?>
+    <?php include '../components/sidebar.php'; ?>
 
     <!-- Contenido Principal -->
     <div class="content">
         <div class="container py-4">
-            <h1 class="text-center mb-5 text-dark">Bienvenido Administrador</h1>
+            <h1 class="text-center mb-5 text-dark">Registrar Empleado</h1>
 
             <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
                 <div class="mt-3">
@@ -51,7 +54,7 @@ if (empty($_SESSION['correo_institucional'])) {
                 </div>
             <?php endif; ?>
 
-            <form class="row g-4 mx-auto" style="max-width: 1200px;" action="functions/registrar.php" method="POST">
+            <form class="row g-4 mx-auto" style="max-width: 1200px;" action="../functions/registrar.php" method="POST">
                 <!-- Columna Izquierda -->
                 <div class="col-md-6">
                     <!-- Card Personal -->
@@ -79,7 +82,7 @@ if (empty($_SESSION['correo_institucional'])) {
                             </div>
 
                             <!-- Género -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="genero" class="form-label">Género</label>
                                 <select class="form-control" name="genero" id="genero" required>
                                     <option value="" disabled selected>Seleccione una opción</option>
@@ -107,7 +110,7 @@ if (empty($_SESSION['correo_institucional'])) {
                             </div>
                             
                             <!-- Otros datos personales -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="usa_ac" class="form-label">¿Usa A/C?</label>
                                 <select class="form-control" name="usa_ac" id="usa_ac" required>
                                     <option value="" disabled selected>Seleccione una opción</option>
@@ -116,13 +119,13 @@ if (empty($_SESSION['correo_institucional'])) {
                                 </select>
                             </div>
                             
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="apellidoc" class="form-label">Apellido de Casada</label>
                                 <input type="text" class="form-control" name="apellidoc" id="apellidoc" oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
                             </div>
 
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <label for="estado_civil" class="form-label">Estado Civil</label>
                                 <select class="form-select" name="estado_civil" id="estado_civil" required>
                                     <option value="" disabled selected>Seleccione su estado civil</option>
@@ -286,9 +289,10 @@ if (empty($_SESSION['correo_institucional'])) {
             </form>
         </div>
     </div>
-    <script src="../javascript/formateo_campos.js"></script>
-    <script src="../javascript/genero.js"></script>
-    <script src="../javascript/localidades.js"></script>
+    <script src="./../../javascript/formateo_campos.js"></script>
+    <script src="./../../javascript/genero.js"></script>
+    <script src="./../../javascript/localidades.js"></script>
+    <script src="./../../javascript/form_advertencia.js"></script>
     
 </body>
 </html>

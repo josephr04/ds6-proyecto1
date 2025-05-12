@@ -1,5 +1,8 @@
 <?php
-include 'utils/conexion.php'; // conexion a la base de datos
+include '../utils/conexion.php'; // conexion a la base de datos
+include '../utils/verificar_rol.php';
+
+verificarRol(1); // Solo administrador
 
 $cedula = $_GET['cedula'] ?? null;
 $datos = null;
@@ -25,17 +28,17 @@ if ($cedula) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- Sidebar -->
-    <?php include 'components/sidebar.php'; ?>
+    <?php include '../components/sidebar.php'; ?>
 
     <!-- Contenido Principal -->
     <div class="content">
         <div class="container py-4">
             <h1 class="text-center mb-5">Modificar Empleado</h1>
-            <form action="functions/actualizar.php" method="POST" class="row g-3">
+            <form action="../functions/actualizar.php" method="POST" class="row g-3">
             <input type="hidden" name="id" value="<?= htmlspecialchars($datos['cedula'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 
                 <!-- Columna Izquierda -->
@@ -322,8 +325,9 @@ if ($cedula) {
         </div>
     </div>
     
-    <script src="../javascript/formateo_campos.js"></script>
-    <script src="../javascript/genero.js"></script>
-    <script src="../javascript/localidades.js"></script>
+    <script src="./../../javascript/formateo_campos.js"></script>
+    <script src="./../../javascript/genero.js"></script>
+    <script src="./../../javascript/localidades.js"></script>
+    <script src="./../../javascript/form_advertencia.js"></script>
 </body>
 </html>

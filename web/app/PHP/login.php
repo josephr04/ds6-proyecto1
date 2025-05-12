@@ -25,7 +25,7 @@
 </head>
 <body>
   <form action="auth/procesar_login.php" method="POST">
-    <section class="gradient-custom">
+    <section class="vh-100 gradient-custom">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -51,7 +51,7 @@
                     </div>
                   <?php endif; ?>
 
-                  <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Olvidó su contraseña?</a></p>
+                  <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./forgot_password.php">Olvidó su contraseña?</a></p>
 
                   <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesión</button>
 
