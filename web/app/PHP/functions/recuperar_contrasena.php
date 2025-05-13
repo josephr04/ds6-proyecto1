@@ -41,6 +41,7 @@ if ($result->num_rows > 0) {
         $mail->SMTPAuth = true;
         $mail->Username = $_ENV['GMAIL_USER'];
         $mail->Password = $_ENV['GMAIL_PASS'];
+        $mail->addEmbeddedImage('../img/skillify_banner.png', 'bannerID');
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
@@ -50,8 +51,13 @@ if ($result->num_rows > 0) {
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
         $mail->Subject = 'Cambiar Contraseña';
-        $mail->Body = "Haz clic en el siguiente enlace para restablecer tu contraseña: <a href='$resetLink'>$resetLink</a>";
-
+        $mail->Body = '
+            <h2>¡Restablece tu contraseña!</h2>
+            <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+            <p><a href="' . $resetLink . '">' . $resetLink . '</a></p>
+            <br>
+            <img src="cid:bannerID" alt="Banner" style="width:100%; max-width:600px;">
+        ';
         $mail->send();
         header("Location: ../reset/recuperacion_exito.php");
     } catch (Exception $e) {

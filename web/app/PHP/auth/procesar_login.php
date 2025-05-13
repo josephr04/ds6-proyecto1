@@ -10,30 +10,39 @@ if (isset($_POST['correo_institucional']) && isset($_POST['contrasena'])) {
     $correo = htmlspecialchars(trim($correo), ENT_QUOTES, 'UTF-8');
     $contrasena = htmlspecialchars(trim($contrasena), ENT_QUOTES, 'UTF-8');
 
-    // Consulta SQL para verificar el usuario y la contraseña
-    $stmt = $conexion->prepare("SELECT id, rol_id FROM usuarios WHERE correo_institucional = ? AND contraseña = ?");
-    $stmt->bind_param("ss", $correo, $contrasena);
+    // Consulta SQL para verificar el usuario
+    $stmt = $conexion->prepare("SELECT id, rol_id, contraseña FROM usuarios WHERE correo_institucional = ?");
+    $stmt->bind_param("s", $correo);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
     if ($resultado->num_rows > 0) {
         $usuario = $resultado->fetch_assoc();
-        session_regenerate_id(true); // Regenerate session ID to prevent session fixation
-        $_SESSION['correo_institucional'] = $correo;
-        $_SESSION['usuario_id'] = $usuario['id'];
-        $_SESSION['rol_id'] = $usuario['rol_id'];
 
-        // Redirigir según el rol
-        if ($usuario['rol_id'] == 1) {
-            header("Location: ../admin/index.php"); // página de administrador
-        } elseif ($usuario['rol_id'] == 2) {
-            header("Location: ../empleado/perfil.php"); // página de usuario
+        // Verificar la contraseña ingresada con la contraseña hasheada
+        if (password_verify($contrasena, $usuario['contraseña'])) {
+            session_regenerate_id(true);
+            $_SESSION['correo_institucional'] = $correo;
+            $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['rol_id'] = $usuario['rol_id'];
+
+            // Redirigir según el rol
+            if ($usuario['rol_id'] == 1) {
+                header("Location: ../admin/index.php"); // página de administrador
+            } elseif ($usuario['rol_id'] == 2) {
+                header("Location: ../empleado/perfil.php"); // página de usuario
+            } else {
+                header("Location: ../login.php?error=Rol no reconocido.");
+            }
+            exit();
         } else {
-            header("Location: ../login.php?error=Rol no reconocido.");
+            // Contraseña incorrecta
+            header("Location: ../login.php?error=Correo o contraseña incorrectos. Por favor, intente de nuevo.");
+            exit();
         }
-        exit();
     } else {
-        header("Location: ../login.php?error=Correo o contraseña incorrectos. Por favor, intente de nuevo.");
+        // Usuario no encontrado
+        header("Location: ../login.php?error=Usuario no encontrado.");
         exit();
     }
 

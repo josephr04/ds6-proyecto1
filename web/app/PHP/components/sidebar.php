@@ -24,6 +24,12 @@
                 <i class="fas fa-user-plus"></i> Agregar Empleado
             </a>
         </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="agregar_usuario.php">
+                <i class="fas fa-users"></i> Usuarios
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-footer">

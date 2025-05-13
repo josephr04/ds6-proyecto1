@@ -4,27 +4,7 @@ include '../utils/conexion.php';
 include '../utils/verificar_rol.php';
 
 verificarRol(1); // Solo administrador
-
-// Duración de la sesión (15 minutos)
-$timeout = 900; // 900 segundos = 15 minutos
-
-if (isset($_SESSION['last_activity'])) {
-    if ((time() - $_SESSION['last_activity']) > $timeout) {
-        // Sesión expirada
-        session_unset();
-        session_destroy();
-        header("Location: login.php");
-        exit();
-    }
-}
-$_SESSION['last_activity'] = time();
-
-if (empty($_SESSION['correo_institucional'])) {
-    header("Location: login.php");
-    exit();
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

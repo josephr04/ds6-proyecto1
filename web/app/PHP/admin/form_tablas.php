@@ -33,9 +33,16 @@ verificarRol(1); // Solo administrador
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
                 </div>
             </div>
+        <?php elseif (isset($_GET['exito']) && $_GET['exito'] == '2'): ?>
+            <div class="mt-3">
+                <div class="alert alert-success alert-dismissible fade show" style="max-width: 500px;" role="alert">
+                    <i class="fa-solid fa-check-circle me-2"></i> ¡Empleado eliminado correctamente!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            </div>
         <?php endif; ?>
 
-        <div class="table-container">
+        <div class="table-container mb-5">
             <table class="table table-bordered table-striped">
                 <thead class="table-primary">
                     <tr>

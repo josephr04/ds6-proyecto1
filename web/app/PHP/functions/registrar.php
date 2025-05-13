@@ -65,7 +65,7 @@ if (isset($_POST["btnregistrar"])) {
     );
 
     if ($stmt->execute()) {
-        header("Location: ../index.php?exito=1");
+        header("Location: ../admin/agregar_empleado.php?exito=1");
     } else {
         echo "Error al registrar empleado: " . $stmt->error;
     }
