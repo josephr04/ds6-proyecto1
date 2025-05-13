@@ -25,12 +25,12 @@ if (empty($_SESSION['correo_institucional'])) {
 }
 
 // Contar usuarios registrados
-$sql = "SELECT COUNT(*) AS total FROM usuarios";
+$sql = "SELECT COUNT(*) AS total FROM empleados";
 $resultado = $conexion->query($sql);
-$usuarios_registrados = 0;
+$empleados_registrados = 0;
 
 if ($resultado && $fila = $resultado->fetch_assoc()) {
-    $usuarios_registrados = $fila['total'];
+    $empleados_registrados = $fila['total'];
 }
 
 $departamentos = ['VE', 'MK', 'TI', 'PR', 'RH', 'ST', 'LE'];
@@ -74,7 +74,7 @@ foreach ($departamentos as $dep) {
                     <div class="card text-white bg-warning">
                     <div class="card-header bg-warning"><i class="fa fa-user-plus"></i> Empleados Registrados</div>
                     <div class="card-body">
-                        <h3 class="card-title"><?php echo $usuarios_registrados; ?></h3>
+                        <h3 class="card-title"><?php echo $empleados_registrados; ?></h3>
                     </div>
                     <a class="card-footer text-right text-decoration-none" href="form_tablas.php">  
                         Más información <i class="fa fa-arrow-circle-right"></i>

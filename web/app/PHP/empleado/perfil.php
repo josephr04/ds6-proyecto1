@@ -29,20 +29,32 @@ $correo = $_SESSION['correo_institucional'];
 $datos = null;
 
 // Consultar la información del usuario
-$sql = $conexion->prepare("SELECT * FROM empleados WHERE correo = ?");
+$sql = $conexion->prepare("SELECT * FROM usuarios WHERE correo_institucional = ?");
 $sql->bind_param("s", $correo);
 $sql->execute();
 $resultado = $sql->get_result();
 
 if ($resultado && $resultado->num_rows > 0) {
-    $datos = $resultado->fetch_assoc();
-    if (isset($datos['cedula'])) {
-        list($prefijo, $tomo, $asiento) = explode('-', $datos['cedula']);
+    $empleado = $resultado->fetch_assoc();
+
+    $cedula = $empleado['cedula'];
+
+    $stmt_empleado = $conexion->prepare("SELECT * FROM empleados WHERE cedula = ?");
+    $stmt_empleado->bind_param("s", $cedula);
+    $stmt_empleado->execute();
+    $res_empleado = $stmt_empleado->get_result();
+
+    if ($res_empleado && $res_empleado->num_rows > 0) {
+        $datos = $res_empleado->fetch_assoc();
+    } else {
+        header("Location: ../login.php?error=No se encontraron datos del empleado.");
+        exit();
     }
 } else {
-    header("Location: login.php?error=No se encontraron datos del usuario.");
+    header("Location: ../login.php?error=No se encontraron datos del usuario.");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -84,17 +96,17 @@ if ($resultado && $resultado->num_rows > 0) {
                                         <?php
                                         $prefijos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', 'PE', 'PN', 'E'];
                                         foreach ($prefijos as $p) {
-                                            $selected = (isset($prefijo) && $p == $prefijo) ? 'selected' : '';
+                                            $selected = (isset($datos['prefijo']) && $p == $datos['prefijo']) ? 'selected' : '';
                                             echo "<option value='$p' $selected>$p</option>";
                                         }
                                         ?>
                                     </select>
                                     <span>-</span>
                                     <input type="number" class="form-control text-center" name="tomo" required style="max-width: 90px;" 
-                                           oninput="this.value = this.value.slice(0, 4)" value="<?= $tomo ?? '' ?>" disabled>
+                                           oninput="this.value = this.value.slice(0, 4)" value="<?= $datos['tomo'] ?? '' ?>" disabled>
                                     <span>-</span>
                                     <input type="number" class="form-control text-center" name="asiento" required style="max-width: 100px;" 
-                                           oninput="this.value = this.value.slice(0, 5)" value="<?= $asiento ?? '' ?>" disabled>
+                                           oninput="this.value = this.value.slice(0, 5)" value="<?= $datos['asiento'] ?? '' ?>" disabled>
                                 </div>
                             </div>
 

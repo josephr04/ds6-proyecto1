@@ -63,7 +63,7 @@ if (isset($_POST["btnactualizar"])) {
     );
 
     if ($stmt->execute()) {
-        header("Location: ../form_tablas.php?exito=1");
+        header("Location: ../admin/form_tablas.php?exito=1");
     } else {
         echo "<div class='alert alert-danger' role='alert'>Error al actualizar los datos.</div>";
     }

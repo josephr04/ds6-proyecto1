@@ -34,42 +34,45 @@ verificarRol(1); // Solo administrador
         <div class="row mb-4">
 
             <div class="col-md-7 mt-4">
-                <div class="table-container">
-                    <table class="table table-bordered table-striped">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>Cédula</th>
-                                <th>Nombre1</th>
-                                <th>Apellido1</th>
-                                <th>Correo Institucional</th>
-                                <th>Rol</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($datos = $sql->fetch_object()) { ?>
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header text-center fw-bold mb-2">Lista de usuarios</div>
+                    <div class="table-container">
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-primary">
                                 <tr>
-                                    <td><?= $datos->cedula ?></td>
-                                    <td><?= $datos->nombre1 ?></td>
-                                    <td><?= $datos->apellido1 ?></td>
-                                    <td><?= $datos->correo_institucional?></td>
-                                    <td><?= ($datos->rol_id == 1) ?'Administrador': 'Usuario' ?></td>
-                                    <td>
-                                        <a href="../functions/eliminar_usuario.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
-                                            <i class="fas fa-trash-alt"></i> Eliminar
-                                        </a>
-                                    </td>
+                                    <th>Cédula</th>
+                                    <th>Nombre1</th>
+                                    <th>Apellido1</th>
+                                    <th>Correo Institucional</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php while ($datos = $sql->fetch_object()) { ?>
+                                    <tr>
+                                        <td><?= $datos->cedula ?></td>
+                                        <td><?= $datos->nombre1 ?></td>
+                                        <td><?= $datos->apellido1 ?></td>
+                                        <td><?= $datos->correo_institucional?></td>
+                                        <td><?= ($datos->rol_id == 1) ?'Administrador': 'Usuario' ?></td>
+                                        <td>
+                                            <a href="../functions/eliminar_usuario.php?cedula=<?= $datos->cedula ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                                <i class="fas fa-trash-alt"></i> Eliminar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-5 mt-4">
                 <form action="../functions/registrar_usuario.php" method="POST" class="mx-auto" style="max-width: 600px;">
                     <div class="card shadow-sm mb-4">
-                        <div class="card-header text-center fw-bold">👤 Crear Usurio</div>
+                        <div class="card-header text-center fw-bold">👤 Crear Usuario</div>
                         <div class="card-body">
 
                         <div class="mb-3">
