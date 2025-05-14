@@ -61,10 +61,10 @@ if ($result->num_rows > 0) {
         $mail->send();
         header("Location: ../reset/recuperacion_exito.php");
     } catch (Exception $e) {
-        echo "Error al enviar el correo: {$mail->ErrorInfo}";
+        header("Location: ../reset/forgot_password.php?error=Error al enviar el correo: {$mail->ErrorInfo}");
     }
 } else {
-    echo "El correo ingresado no está registrado.";
+    header("Location: ../reset/forgot_password.php?error=El correo ingresado no está registrado.");
 }
 
 ?>
