@@ -104,7 +104,7 @@ if ($cedula) {
                                        required oninput="this.value = validarSoloLetras(this.value.slice(0, 25))">
                             </div>
                             
-                            <!-- Otros datos personales -->
+                            <!-- Usa A/C -->
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="usa_ac" class="form-label">¿Usa A/C?</label>
@@ -122,17 +122,19 @@ if ($cedula) {
                                 </div>
                             </div>
 
+                            <!-- Estado Civil -->
                             <div class="col-md-6">
-                            <label for="estado_civil" class="form-label">Estado Civil</label>
-                            <select class="form-select" name="estado_civil" id="estado_civil" required>
-                                <option value="" disabled <?php echo ($datos['estado_civil'] == '') ? 'selected' : ''; ?>>Seleccione su estado civil</option>
-                                <option value="1" <?php echo ($datos['estado_civil'] == '1') ? 'selected' : ''; ?>>Soltero/a</option>
-                                <option value="2" <?php echo ($datos['estado_civil'] == '2') ? 'selected' : ''; ?>>Casado/a</option>
-                                <option value="3" <?php echo ($datos['estado_civil'] == '3') ? 'selected' : ''; ?>>Divorciado/a</option>
-                                <option value="4" <?php echo ($datos['estado_civil'] == '4') ? 'selected' : ''; ?>>Viudo/a</option>
-                            </select>
-                        </div>
-                            
+                                <label for="estado_civil" class="form-label">Estado Civil</label>
+                                <select class="form-select" name="estado_civil" id="estado_civil" required>
+                                    <option value="" disabled <?php echo ($datos['estado_civil'] == '') ? 'selected' : ''; ?>>Seleccione su estado civil</option>
+                                    <option value="1" <?php echo ($datos['estado_civil'] == '1') ? 'selected' : ''; ?>>Soltero/a</option>
+                                    <option value="2" <?php echo ($datos['estado_civil'] == '2') ? 'selected' : ''; ?>>Casado/a</option>
+                                    <option value="3" <?php echo ($datos['estado_civil'] == '3') ? 'selected' : ''; ?>>Divorciado/a</option>
+                                    <option value="4" <?php echo ($datos['estado_civil'] == '4') ? 'selected' : ''; ?>>Viudo/a</option>
+                                </select>
+                            </div>
+
+                            <!-- Fecha de nacimiento -->
                             <div class="mb-3">
                                 <label class="form-label">Fecha de Nacimiento</label>
                                 <input type="date" class="form-control" name="f_nacimiento" value="<?= $datos['f_nacimiento'] ?? '' ?>">

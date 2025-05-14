@@ -1,4 +1,4 @@
-<!-- sidebar.php -->
+<!-- empleado_sidebar.php -->
 <div class="sidebar">
     <div class="sidebar-header flex">
         <p class="text-center text-muted mb-0 small">

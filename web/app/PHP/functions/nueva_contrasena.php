@@ -1,12 +1,12 @@
 <?php
 include '../utils/conexion.php';
 
-$token = $_GET['token'] ?? ''; // Obtener el token de la URL
+$token = $_GET['token'] ?? '';
 
 // Si la solicitud es un POST, procesamos el restablecimiento de la contraseña
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['token'] ?? '';
-    $newPassword = $_POST['new_password'] ?? ''; // Obtener la nueva contraseña
+    $newPassword = $_POST['new_password'] ?? '';
 
     // Validar el token y actualizar la contraseña
     $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE reset_token = ? AND reset_token_expiry > NOW()");
@@ -20,10 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ss", $hashedPassword, $token);
         $stmt->execute();
 
-        // Mostrar mensaje de éxito
         $successMessage = "Tu contraseña ha sido restablecida correctamente.";
     } else {
-        // Mostrar mensaje de error
         $errorMessage = "El token es inválido o ha expirado.";
     }
 }
@@ -34,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/skillify_favicon.ico" type="image/ico">
     <title>Restablecer Contraseña</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   
@@ -91,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   </style>
 </head>
-
 <body>
     <section class="d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4" style="max-width: 500px;">

@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../admin/agregar_usuario.php?exito=1");
         exit();
     } else {
-        echo "Error al registrar: " . $stmt->error;
+        header("Location: ../admin/agregar_usuario.php?error=Error al registrar: " . $stmt->error);
     }
 
     $stmt->close();

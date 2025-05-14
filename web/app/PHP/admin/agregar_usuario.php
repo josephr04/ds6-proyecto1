@@ -21,9 +21,10 @@ verificarRol(1); // Solo administrador
 <body>
     <?php include '../components/sidebar.php'; ?>
 
-    <div class="container py-5" style="padding-left: 250px;">
-        <h2 class="text-center mb-4">Usuarios</h2>
-
+    <div class="container py-4" style="padding-left: 250px;">
+        <h1 class="text-center text-dark">Usuarios</h1>
+                
+        <!-- Mensaje de éxito -->
         <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="fa fa-check-circle me-2"></i> ¡Usuario creado correctamente!
@@ -33,6 +34,7 @@ verificarRol(1); // Solo administrador
 
         <div class="row mb-4">
 
+            <!-- Lista de usuarios -->
             <div class="col-md-7 mt-4">
                 <div class="card shadow-sm mb-4">
                     <div class="card-header text-center fw-bold mb-2">Lista de usuarios</div>
@@ -68,7 +70,8 @@ verificarRol(1); // Solo administrador
                     </div>
                 </div>
             </div>
-
+                
+            <!-- Form de usuario -->
             <div class="col-md-5 mt-4">
                 <form action="../functions/registrar_usuario.php" method="POST" class="mx-auto" style="max-width: 600px;">
                     <div class="card shadow-sm mb-4">

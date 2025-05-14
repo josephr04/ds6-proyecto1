@@ -26,6 +26,7 @@ verificarRol(1); // Solo administrador
 
         <h2 class="text-center mb-4 mt-4 text-dark">📋 Lista de Empleados</h2>
 
+        <!-- Mensaje de éxito -->
         <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
             <div class="mt-3">
                 <div class="alert alert-success alert-dismissible fade show" style="max-width: 500px;" role="alert">
@@ -41,7 +42,8 @@ verificarRol(1); // Solo administrador
                 </div>
             </div>
         <?php endif; ?>
-
+                
+        <!-- Tabla de empleados -->
         <div class="table-container mb-5">
             <table class="table table-bordered table-striped">
                 <thead class="table-primary">

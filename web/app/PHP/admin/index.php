@@ -68,6 +68,8 @@ foreach ($departamentos as $dep) {
     <div class="content">
         <div class="container py-4">
             <h1 class="text-center mb-5 text-dark">Bienvenido Administrador</h1>
+            
+            <!-- Cartas del dashboard -->
             <div class="row">
                 
                 <div class="col-lg-3 col-md-3 col-sm-12 pr-0 mb-3">
@@ -172,6 +174,5 @@ foreach ($departamentos as $dep) {
     <script src="../javascript/formateo_campos.js"></script>
     <script src="../javascript/genero.js"></script>
     <script src="../javascript/localidades.js"></script>
-    
 </body>
 </html>

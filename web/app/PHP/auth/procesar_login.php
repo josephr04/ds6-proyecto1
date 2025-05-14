@@ -6,11 +6,10 @@ if (isset($_POST['correo_institucional']) && isset($_POST['contrasena'])) {
     $correo = $_POST['correo_institucional'];
     $contrasena = $_POST['contrasena'];
 
-    // Sanitizar y validar los parámetros de entrada
     $correo = htmlspecialchars(trim($correo), ENT_QUOTES, 'UTF-8');
     $contrasena = htmlspecialchars(trim($contrasena), ENT_QUOTES, 'UTF-8');
 
-    // Consulta SQL para verificar el usuario
+    // Consultar SQL para verificar el usuario
     $stmt = $conexion->prepare("SELECT id, rol_id, contraseña FROM usuarios WHERE correo_institucional = ?");
     $stmt->bind_param("s", $correo);
     $stmt->execute();
@@ -36,12 +35,10 @@ if (isset($_POST['correo_institucional']) && isset($_POST['contrasena'])) {
             }
             exit();
         } else {
-            // Contraseña incorrecta
             header("Location: ../login.php?error=Correo o contraseña incorrectos. Por favor, intente de nuevo.");
             exit();
         }
     } else {
-        // Usuario no encontrado
         header("Location: ../login.php?error=Usuario no encontrado.");
         exit();
     }

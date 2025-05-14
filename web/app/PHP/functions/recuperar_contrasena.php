@@ -13,7 +13,7 @@ $dotenv->load();
 $email = $_POST['email'] ?? '';
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "Error: Dirección de correo no válida.";
+    header("Location: ../reset/forgot_password.php?error=Dirección de correo no válida.");
     exit();
 }
 
